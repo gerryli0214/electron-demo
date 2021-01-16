@@ -1,0 +1,38 @@
+{
+    "productName": "demo",
+    "appId": "com.aimooc.xxxxx",
+    "copyright": "xxxx",
+    "directories": {
+      "output": "dist"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "测试"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://xxxxx/"
+      }
+    ],
+    "files": [
+      "dist/**/*",
+      "build/entry.js",
+      "index.html"
+    ],
+    "win": {
+      "icon": "build/icons/222.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    }
+  }

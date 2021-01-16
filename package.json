@@ -1,0 +1,45 @@
+{
+  "name": "electron-demo",
+  "version": "1.0.0",
+  "description": "This is an electron demo",
+  "main": "./build/entry.js",
+  "scripts": {
+    "start-web": "webpack-dev-server --config ./build/webpack.config.js --mode development",
+    "start-client": "chcp 65001 && electron .",
+    "build-web": "webpack --config ./build/webpack.config.js --mode production",
+    "build-win": "electron-builder -w --config ./electron-builder.json",
+    "build-arm": "electron-builder --arm64 --config ./electron-builder.json",
+    "build-linux": "electron-builder --linux --config ./electron-builder.json"
+  },
+  "keywords": [
+    "electron"
+  ],
+  "author": "gerry",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
+    "babel-loader": "^8.2.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.1",
+    "electron": "^10.1.1",
+    "electron-devtools-installer": "^3.1.1",
+    "eslint": "^7.14.0",
+    "eslint-loader": "^4.0.2",
+    "html-webpack-plugin": "^4.3.0",
+    "node-sass": "^5.0.0",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "vue-loader": "^15.9.6",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "vue": "^2.6.12",
+    "vue-router": "^3.4.9"
+  }
+}
