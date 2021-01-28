@@ -43,6 +43,11 @@ module.exports = {
                 test: /\.vue$/,
                 use: ['vue-loader'],
                 exclude: /node_modules/
+            },
+            {
+                
+                test: /\.(jpg|png|gif)$/,
+                use: ['url-loader'],
             }
         ]
     },

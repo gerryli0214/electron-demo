@@ -1,7 +1,5 @@
 <template>
-  <div>
-    456
-  </div>
+  <div class="full"></div>
 </template>
 
 <script>
@@ -9,3 +7,10 @@
     name: 'layout'
   }
 </script>
+
+<style>
+  .full{
+    width: 100%;
+    height: 100%;
+  }
+</style>

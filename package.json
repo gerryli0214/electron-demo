@@ -26,11 +26,13 @@
     "electron-devtools-installer": "^3.1.1",
     "eslint": "^7.14.0",
     "eslint-loader": "^4.0.2",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.3.0",
     "node-sass": "^5.0.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
     "vue-loader": "^15.9.6",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
@@ -39,6 +41,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "echarts": "^5.0.1",
+    "v-debounce-throttle": "^1.0.23",
     "vue": "^2.6.12",
     "vue-router": "^3.4.9"
   }
