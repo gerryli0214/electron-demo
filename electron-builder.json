@@ -11,7 +11,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "测试"
+      "shortcutName": "前端音频"
     },
     "publish": [
       {
@@ -32,6 +32,15 @@
           "arch": [
             "ia32"
           ]
+        }
+      ]
+    },
+    "linux": {
+      "icon": "build/icons/222.ico",
+      "maintainer": "gerry",
+      "target": [
+        {
+          "target": "deb"
         }
       ]
     }
