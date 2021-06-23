@@ -11,7 +11,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "前端音频"
+      "shortcutName": "demo"
     },
     "publish": [
       {

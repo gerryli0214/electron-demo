@@ -1,6 +1,6 @@
 <template>
   <div>
-    录屏
+    屏幕录制
   </div>
 </template>
 
