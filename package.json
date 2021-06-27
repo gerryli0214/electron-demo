@@ -9,7 +9,8 @@
     "build-web": "webpack --config ./build/webpack.config.js --mode production",
     "build-win": "electron-builder -w --config ./electron-builder.json",
     "build-arm": "electron-builder --arm64 --config ./electron-builder.json",
-    "build-linux": "electron-builder --linux --config ./electron-builder.json"
+    "build-linux": "electron-builder --linux --config ./electron-builder.json",
+    "test-storage": "mocha .electron/test/storage.js"
   },
   "keywords": [
     "electron"
@@ -46,6 +47,7 @@
   "dependencies": {
     "echarts": "^5.0.1",
     "element-ui": "^2.15.1",
+    "expect.js": "^0.3.1",
     "normalize.css": "^8.0.1",
     "pdfjs-dist": "^2.6.347",
     "v-debounce-throttle": "^2.0.2",
