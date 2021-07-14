@@ -21,7 +21,7 @@
     ],
     "files": [
       "dist/**/*",
-      "build/entry.js",
+      ".electron/entry.js",
       "index.html"
     ],
     "win": {

@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Notification, dialog } = require('electron')
-const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
+// const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
 // const minimist = require('minimist')
 
@@ -12,6 +12,16 @@ global.shareData = {
         dialog
     }
 }
+// 设置开机自启动
+console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}`)
+if (process.env.NODE_ENV !== 'development') {
+    app.setLoginItemSettings({
+        openAtLogin: true,
+        openAsHidden:false,
+        path: process.execPath
+    })
+}
+
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -31,9 +41,9 @@ process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 function init () {
     createWindow()
-    installExtension(VUEJS_DEVTOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log('An error occurred: ', err))
+    // installExtension(VUEJS_DEVTOOLS)
+    // .then((name) => console.log(`Added Extension:  ${name}`))
+    // .catch((err) => console.log('An error occurred: ', err))
 }
 
 function getDefaultOption () {
@@ -43,8 +53,8 @@ function getDefaultOption () {
         webPreferences: {
             nodeIntegration: true, // 允许渲染进程使用node
             enableRemoteModule: true, // 可以启用webRTC
-            webSecurity: false, // 禁用浏览器安全协议，否则打不开本地文件
-            preload: path.join(__dirname, 'preload.js')
+            webSecurity: false // 禁用浏览器安全协议，否则打不开本地文件
+            // preload: path.join(__dirname, 'preload.js')
         }
     }
 }
