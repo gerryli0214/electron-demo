@@ -5,7 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = {
     entry: './web/src/main.js',
     output: {
-        path: path.resolve(__dirname, '../web'),
+        path: path.resolve(__dirname, '../webPackage'),
         filename: '[name].[hash].js'
     },
     devtool: 'eval-source-map',

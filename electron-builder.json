@@ -20,9 +20,8 @@
       }
     ],
     "files": [
-      "dist/**/*",
-      ".electron/entry.js",
-      "index.html"
+      "webPackage/**/*",
+      ".electron/**/*"
     ],
     "win": {
       "icon": "build/icons/222.ico",

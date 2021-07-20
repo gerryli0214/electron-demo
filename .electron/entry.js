@@ -1,9 +1,9 @@
 const { app, BrowserWindow, Notification, dialog } = require('electron')
 // const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
-// const minimist = require('minimist')
+const minimist = require('minimist')
 
-// const args = minimist(process.argv.slice(1))
+const args = minimist(process.argv.slice(1))
 
 global.shareData = {
     $currentWindow: null,
@@ -13,8 +13,7 @@ global.shareData = {
     }
 }
 // 设置开机自启动
-console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}`)
-if (process.env.NODE_ENV !== 'development') {
+if (args.mode !== 'development') {
     app.setLoginItemSettings({
         openAtLogin: true,
         openAsHidden:false,
@@ -53,8 +52,8 @@ function getDefaultOption () {
         webPreferences: {
             nodeIntegration: true, // 允许渲染进程使用node
             enableRemoteModule: true, // 可以启用webRTC
-            webSecurity: false // 禁用浏览器安全协议，否则打不开本地文件
-            // preload: path.join(__dirname, 'preload.js')
+            webSecurity: false, // 禁用浏览器安全协议，否则打不开本地文件
+            preload: path.resolve(__dirname, './preload.js')
         }
     }
 }
@@ -68,10 +67,13 @@ function createWindow (options) {
     Object.assign(currentOptions, options)
     console.log('打开页面')
     const win = new BrowserWindow(currentOptions)
-    // win.loadFile('index.html')
-    win.loadURL('http://localhost:8080')
+    let filePath = args.mode === 'development' ? 'http://localhost:8080' : path.resolve(__dirname, '../webPackage/index.html')
+    console.log(`load file path-----> ${filePath}`)
+    win.loadURL(filePath)
     // 打开开发者工具
-    win.webContents.openDevTools({
-        mode: 'bottom'
-    })
+    if (args.mode === 'development') {
+        win.webContents.openDevTools({
+            mode: 'bottom'
+        })
+    }
 }

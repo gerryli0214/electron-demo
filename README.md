@@ -24,8 +24,7 @@ build arm platform
 
 build linux platform
 
-
-## notes
+## 注意事项
 
 - [electron-v10.4.7-win32-ia32.zip](https://github.com/electron/electron/releases/download/v10.4.7/electron-v10.4.7-win32-ia32.zip)
 
@@ -49,4 +48,6 @@ async executeMakensis(defines, commands, script) {
       args.push(`-D${name}=${value}`);
     }
   }
+  // ...
+}
 ```

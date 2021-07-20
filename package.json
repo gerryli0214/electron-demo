@@ -5,7 +5,7 @@
   "main": "./.electron/entry.js",
   "scripts": {
     "start-web": "webpack-dev-server --config ./build/webpack.config.js --mode development",
-    "start-client": "chcp 65001 && electron .",
+    "start-client": "chcp 65001 && electron . --mode development",
     "build-web": "webpack --config ./build/webpack.config.js --mode production",
     "build-win": "electron-builder -w --config ./electron-builder.json",
     "build-arm": "electron-builder --arm64 --config ./electron-builder.json",
@@ -32,7 +32,6 @@
     "eslint-loader": "^4.0.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.3.0",
-    "minimist": "^1.2.5",
     "node-sass": "^5.0.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
@@ -53,6 +52,7 @@
     "pdfjs-dist": "^2.6.347",
     "v-debounce-throttle": "^2.0.2",
     "vue": "^2.6.12",
-    "vue-router": "^3.4.9"
+    "vue-router": "^3.4.9",
+    "minimist": "^1.2.5"
   }
 }
