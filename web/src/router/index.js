@@ -16,23 +16,23 @@ const constantRoutes = [
         path: 'voice-record',
         component: () => import('../views/voice-record/index.vue'),
         meta: {
-          title: '录制声音'
-        }
-      },
-      {
-        path: 'screen-record',
-        component: () => import('../views/screen-record/index.vue'),
-        meta: {
-          title: '录制屏幕'
-        }
-      },
-      {
-        path: 'video-record',
-        component: () => import('../views/video-record/index.vue'),
-        meta: {
-          title: '录制视频'
+          title: '音频处理'
         }
       }
+      // {
+      //   path: 'screen-record',
+      //   component: () => import('../views/screen-record/index.vue'),
+      //   meta: {
+      //     title: '录制屏幕'
+      //   }
+      // },
+      // {
+      //   path: 'video-record',
+      //   component: () => import('../views/video-record/index.vue'),
+      //   meta: {
+      //     title: '录制视频'
+      //   }
+      // }
     ]
   }
 ]

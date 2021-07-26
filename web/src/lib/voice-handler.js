@@ -26,7 +26,6 @@ class VoiceHandler {
         label
       }
     }
-    debugger
   }
 
 }
