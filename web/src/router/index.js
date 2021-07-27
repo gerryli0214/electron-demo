@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 const constantRoutes = [
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home/voice-record'
   },
   {
     path: '/home',

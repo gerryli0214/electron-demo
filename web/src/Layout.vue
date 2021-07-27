@@ -4,16 +4,16 @@
       <el-menu default-active="/home/voice-record" class="el-menu-vertical-demo" router>
         <el-menu-item index="/home/voice-record">
           <i class="el-icon-menu"></i>
-          <span slot="title">录制声音</span>
+          <span slot="title">测试</span>
         </el-menu-item>
-        <el-menu-item index="/home/screen-record">
+        <!-- <el-menu-item index="/home/screen-record">
           <i class="el-icon-document"></i>
           <span slot="title">录制屏幕</span>
         </el-menu-item>
         <el-menu-item index="/home/video-record">
           <i class="el-icon-setting"></i>
           <span slot="title">录制视频</span>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu>
     </div>
     <div class="main">

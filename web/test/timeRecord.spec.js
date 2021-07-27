@@ -1,6 +1,6 @@
 const expect = require('expect.js')
 const $require = require('esm')(module)
-TimeRecord = $require('../src/lib/time-record').default
+const TimeRecord = $require('../src/lib/time-record').default
 
 describe('test time record function', function () {
   let timeInstance = new TimeRecord()
