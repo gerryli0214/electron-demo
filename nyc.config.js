@@ -7,5 +7,5 @@ module.exports = {
     "web/test/*.spec.js"
   ],
   checkCoverage: false,
-  reporter: 'html'
+  reporter: ['text', 'html']
 }

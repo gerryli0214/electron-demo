@@ -1,0 +1,122 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2021-07-27T02:40:25.783Z",
+    "end": "2021-07-27T02:40:25.800Z",
+    "duration": 17,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a4bfa4b1-49bd-4a1b-bc00-96c816495e71",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ca92efd2-0d6a-487e-b59a-cb296f3dae28",
+          "title": "test time record function",
+          "fullFile": "E:\\code\\electron-demo\\web\\test\\timeRecord.spec.js",
+          "file": "\\web\\test\\timeRecord.spec.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should originDate === \"00:00:00\"",
+              "fullTitle": "test time record function should originDate === \"00:00:00\"",
+              "timedOut": false,
+              "duration": 2,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "expect(timeInstance.originData).to.be('00:00:00')",
+              "err": {},
+              "uuid": "2d2b5d2f-fc00-426b-8ec3-1fc44c0936d3",
+              "parentUUID": "ca92efd2-0d6a-487e-b59a-cb296f3dae28",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "test parse date function",
+              "fullTitle": "test time record function test parse date function",
+              "timedOut": false,
+              "duration": 1,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let millseconds = timeInstance.parseDate('00:10:10')\nexpect(millseconds).to.be(10 * 60 * 1000 + 10 * 1000)",
+              "err": {},
+              "uuid": "6fba90a2-184e-487c-8037-22ec2732f571",
+              "parentUUID": "ca92efd2-0d6a-487e-b59a-cb296f3dae28",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2d2b5d2f-fc00-426b-8ec3-1fc44c0936d3",
+            "6fba90a2-184e-487c-8037-22ec2732f571"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 3,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "9.0.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "customReportFilename",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "6.2.2"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "mochaReporter",
+        "reportFilename": "customReportFilename"
+      },
+      "version": "5.2.0"
+    }
+  }
+}
