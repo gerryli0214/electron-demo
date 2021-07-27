@@ -10,8 +10,7 @@
     "build-win": "electron-builder -w --config ./electron-builder.json",
     "build-arm": "electron-builder --arm64 --config ./electron-builder.json",
     "build-linux": "electron-builder --linux --config ./electron-builder.json",
-    "test-storage": "mocha .electron/test/storage.js",
-    "unit-test": "node .electron/test/index.js",
+    "test-storage": "nyc mocha .electron/test/storage.spec.js",
     "test-timer": "nyc mocha ./web/test/timeRecord.spec.js",
     "test-timer-reporter": "mocha ./web/test/timeRecord.spec.js --reporter mochawesome --reporter-options reportDir=mochaReporter,reportFilename=customReportFilename"
   },
