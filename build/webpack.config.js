@@ -1,7 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
     entry: './web/src/main.js',
@@ -56,6 +55,5 @@ module.exports = {
             template: "./index.html"
         }),
         new VueLoaderPlugin()
-    ],
-    externals: [nodeExternals()]
+    ]
 }

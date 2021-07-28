@@ -9,7 +9,7 @@ class VoiceHandler {
   init () {
     this.voiceRecordDeviceList = []
     // web端录音需要用户权限授权，仅当localhost && https服务下可用
-    this.isCanRecord = window.navigator.mediaDevices
+    this.isCanRecord = !!window.navigator.mediaDevices
   }
 
   async getRecordList () {

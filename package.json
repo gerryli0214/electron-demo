@@ -13,7 +13,7 @@
     "test-storage": "nyc mocha .electron/test/storage.spec.js",
     "test-timer": "nyc mocha ./web/test/timeRecord.spec.js",
     "test-timer-reporter": "mocha ./web/test/timeRecord.spec.js --reporter mochawesome --reporter-options reportDir=mochaReporter,reportFilename=customReportFilename",
-    "test-layout": "mochapack  --webpack-config ./build/webpack.config.js --require ./web/test/setup.js ./web/test/layout.spec.js"
+    "test-voiceRecord": "mochapack  --webpack-config ./build/webpack.test.config.js --require ./web/test/setup.js ./web/test/voiceRecord.spec.js"
   },
   "keywords": [
     "electron"
@@ -35,6 +35,7 @@
     "eslint-loader": "^4.0.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.3.0",
+    "istanbul-instrumenter-loader": "^3.0.1",
     "node-sass": "^5.0.0",
     "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
