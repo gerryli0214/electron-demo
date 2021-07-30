@@ -52,6 +52,7 @@
   "dependencies": {
     "@vue/test-utils": "^1.2.2",
     "echarts": "^5.0.1",
+    "electron-log": "^4.4.0",
     "element-ui": "^2.15.1",
     "esm": "^3.2.25",
     "expect.js": "^0.3.1",
