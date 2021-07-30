@@ -2,7 +2,7 @@
 
 This is a electron demo
 
-## startup
+## 启动命令
 
 - npm run start-web
 
@@ -26,11 +26,13 @@ build linux platform
 
 ## 注意事项
 
+### 依赖文件手动下载地址
+
 - [electron-v10.4.7-win32-ia32.zip](https://github.com/electron/electron/releases/download/v10.4.7/electron-v10.4.7-win32-ia32.zip)
 
 - [niss](https://github.com/electron-userland/electron-builder-binaries/releases/tag/nsis-3.0.4.1)
 
-- niss乱码解析配置修改
+### niss乱码解析配置修改（项目目录中存在中文字符，导致打包失败）
 
 ```JavaScript
 //node_module/app-builder-lib/out/targets/nsis/NsisTarget.js
