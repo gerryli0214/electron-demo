@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Notification, dialog } = require('electron')
+const { app, BrowserWindow, Notification, dialog, ipcMain } = require('electron')
 // const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
 const minimist = require('minimist')
@@ -10,7 +10,8 @@ global.shareData = {
     $electron: {
         Notification,
         dialog
-    }
+    },
+    $createWindow: createWindow
 }
 // 设置开机自启动
 if (args.mode !== 'development') {
@@ -39,7 +40,8 @@ app.on('activate', () => {
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 function init () {
-    createWindow()
+    let filePath = args.mode === 'development' ? 'http://localhost:8080/main.html' : path.resolve(__dirname, '../webPackage/main.html')
+    createWindow(filePath)
     // installExtension(VUEJS_DEVTOOLS)
     // .then((name) => console.log(`Added Extension:  ${name}`))
     // .catch((err) => console.log('An error occurred: ', err))
@@ -62,12 +64,21 @@ app.on('ready', () => {
     init()
 })
 
-function createWindow (options) {
+ipcMain.on('asynchronous-message', (event, arg) => {
+    console.log(arg) // prints "ping"
+    event.reply('asynchronous-reply', 'pong')
+})
+
+ipcMain.on('synchronous-message', (event, arg) => {
+    console.log(arg) // prints "ping"
+    event.returnValue = 'pong'
+})
+
+function createWindow (filePath, options) {
     let currentOptions = Object.create(getDefaultOption())
     Object.assign(currentOptions, options)
     console.log('打开页面')
     const win = new BrowserWindow(currentOptions)
-    let filePath = args.mode === 'development' ? 'http://localhost:8080' : path.resolve(__dirname, '../webPackage/index.html')
     console.log(`load file path-----> ${filePath}`)
     win.loadURL(filePath)
     // 打开开发者工具

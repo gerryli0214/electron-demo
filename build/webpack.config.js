@@ -1,16 +1,20 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-    entry: './web/src/main.js',
+    entry: {
+        main: './web/src/main.js',
+        test: './web/src/test.js'
+    },
     output: {
         path: path.resolve(__dirname, '../webPackage'),
-        filename: '[name].[hash].js'
+        filename: './js/[name].[hash].js'
     },
     devtool: 'eval-source-map',
     devServer: {
-        contentBase: path.join(__dirname, "../web"),
+        contentBase: path.join(__dirname, "../webPackage"),
         hot: true
     },
     module: {
@@ -52,8 +56,18 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./index.html"
+            filename: 'main.html',
+            template: "./main.html",
+            chunks: ['main']
         }),
-        new VueLoaderPlugin()
+        new HtmlWebpackPlugin({  // Also generate a test.html
+            filename: 'test.html',
+            template: './test.html',
+            chunks: ['test']
+        }),
+        new VueLoaderPlugin(),
+        new CleanWebpackPlugin({
+            root: path.resolve(__dirname, 'webPackage')
+        })
     ]
 }
