@@ -2,6 +2,7 @@ const { app, BrowserWindow, Notification, dialog, ipcMain } = require('electron'
 // const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
 const minimist = require('minimist')
+const fs = require('fs')
 
 const args = minimist(process.argv.slice(1))
 
@@ -10,6 +11,10 @@ global.shareData = {
     $electron: {
         Notification,
         dialog
+    },
+    $nodejs: {
+        fs,
+        path
     },
     $createWindow: createWindow
 }
@@ -74,10 +79,15 @@ ipcMain.on('synchronous-message', (event, arg) => {
     event.returnValue = 'pong'
 })
 
+const httpPattern = /^http:\/\//
+
 function createWindow (filePath, options) {
     let currentOptions = Object.create(getDefaultOption())
     Object.assign(currentOptions, options)
     console.log('打开页面')
+    if (!httpPattern.test(filePath)) {
+        filePath = path.resolve(__dirname, filePath)
+    }
     const win = new BrowserWindow(currentOptions)
     console.log(`load file path-----> ${filePath}`)
     win.loadURL(filePath)
@@ -87,4 +97,5 @@ function createWindow (filePath, options) {
             mode: 'bottom'
         })
     }
+    return win
 }

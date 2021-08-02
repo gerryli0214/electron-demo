@@ -28,18 +28,27 @@
       ipcRenderer.on('asynchronous-reply', (event, arg) => {
         console.log(arg) // prints "pong"
       })
+
+       $ipc.on('TEST_WINDOW_CLOSE', this.handleTestWindowClose)
     },
     methods: {
       openNewWindow () {
-        if (this.winInstance) return
-        let filePath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/test.html' : '../webPackage/main.html'
-        $createWindow(filePath)
+        if (this.winInstance) {
+          alert('Test窗口已打开')
+          this.winInstance.moveTop()
+          return
+        }
+        let filePath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/test.html' : '../webPackage/test.html'
+        this.winInstance = $createWindow(filePath)
       },
       sendMessageToMainProcess () {
         ipcRenderer.send('asynchronous-message', 'ping')
       },
       sendMessageToRenderProcess () {
         $ipc.send('TEST_SEND_MESSAGE', 'hello world')
+      },
+      handleTestWindowClose () {
+        this.winInstance = null
       }
     }
   }
