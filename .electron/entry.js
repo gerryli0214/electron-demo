@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Notification, dialog, ipcMain } = require('electron')
+const { app, BrowserWindow, Notification, dialog, ipcMain, globalShortcut, Menu, MenuItem } = require('electron')
 // const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
 const minimist = require('minimist')
@@ -6,11 +6,15 @@ const fs = require('fs')
 
 const args = minimist(process.argv.slice(1))
 
+console.log(`__dirname: ${__dirname}`)
+
 global.shareData = {
     $currentWindow: null,
     $electron: {
         Notification,
-        dialog
+        dialog,
+        Menu,
+        MenuItem
     },
     $nodejs: {
         fs,
@@ -42,10 +46,19 @@ app.on('activate', () => {
     }
 })
 
+app.on('ready', () => {
+    init()
+    registerShortcut()
+})
+
+app.on('will-quit', () => {
+    globalShortcut.unregisterAll()
+})
+
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 function init () {
-    let filePath = args.mode === 'development' ? 'http://localhost:8080/main.html' : path.resolve(__dirname, '../webPackage/main.html')
+    let filePath = args.mode === 'development' ? 'http://localhost:8080/main.html' : path.resolve(__dirname, '../resources/app.asar/webPackage/main.html')
     createWindow(filePath)
     // installExtension(VUEJS_DEVTOOLS)
     // .then((name) => console.log(`Added Extension:  ${name}`))
@@ -53,21 +66,19 @@ function init () {
 }
 
 function getDefaultOption () {
+    let preloadPath = args.mode === 'development' ? path.resolve(__dirname, './preload.js') : path.resolve(__dirname, '../resources/app.asar/mainPackage/preload.js')
     return {
         width: 1200,
         height: 800,
+        fullscreen: false,
         webPreferences: {
             nodeIntegration: true, // 允许渲染进程使用node
             enableRemoteModule: true, // 可以启用webRTC
             webSecurity: false, // 禁用浏览器安全协议，否则打不开本地文件
-            preload: path.resolve(__dirname, './preload.js')
+            preload: preloadPath
         }
     }
 }
-
-app.on('ready', () => {
-    init()
-})
 
 ipcMain.on('asynchronous-message', (event, arg) => {
     console.log(arg) // prints "ping"
@@ -98,4 +109,18 @@ function createWindow (filePath, options) {
         })
     }
     return win
+}
+// 注册全局快捷键
+function registerShortcut () {
+    const ret = globalShortcut.register('CommandOrControl+X', () => {
+        console.log('CommandOrControl+X is pressed')
+        app.quit()
+    })
+
+    if (!ret) {
+        console.log('registration failed')
+    }
+
+    // 检查快捷键是否注册成功
+    console.log(globalShortcut.isRegistered('CommandOrControl+X'))
 }

@@ -8,7 +8,7 @@
 
 <script>
   import VoiceHandler from '../../lib/voice-handler.js'
-  const { ipcRenderer } = $electron
+  const { ipcRenderer, Menu, MenuItem } = $electron
   export default {
     name: 'voiceRecord',
     data () {
@@ -29,7 +29,17 @@
         console.log(arg) // prints "pong"
       })
 
-       $ipc.on('TEST_WINDOW_CLOSE', this.handleTestWindowClose)
+      $ipc.on('TEST_WINDOW_CLOSE', this.handleTestWindowClose)
+
+      var menu = new Menu();
+      menu.append(new MenuItem({ label: '测试1', click: function() { console.log('item 1 clicked'); } }));
+      menu.append(new MenuItem({ type: 'separator' }));
+      menu.append(new MenuItem({ label: '测试2', type: 'checkbox', checked: true }));
+
+      window.oncontextmenu = function (e) {
+        e.preventDefault();
+        menu.popup($currentWindow);
+      }
     },
     methods: {
       openNewWindow () {
@@ -38,7 +48,7 @@
           this.winInstance.moveTop()
           return
         }
-        let filePath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/test.html' : '../webPackage/test.html'
+        let filePath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/test.html' : '../resources/app.asar/webPackage/test.html'
         this.winInstance = $createWindow(filePath)
       },
       sendMessageToMainProcess () {
