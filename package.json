@@ -15,8 +15,9 @@
     "test-storage": "nyc mocha .electron/test/storage.spec.js",
     "test-timer": "nyc mocha ./web/test/timeRecord.spec.js",
     "test-timer-reporter": "mocha ./web/test/timeRecord.spec.js --reporter mochawesome --reporter-options reportDir=mochaReporter,reportFilename=customReportFilename",
-    "test-voiceRecord": "mochapack  --webpack-config ./build/webpack.test.config.js --require ./web/test/setup.js ./web/test/voiceRecord.spec.js",
-    "test-add": "nyc mocha .electron/test/calc.spec.js"
+    "test-vue-demo": "mochapack  --webpack-config ./build/webpack.test.config.js --require ./web/test/setup.js web/test/demo.spec.js",
+    "test-add": "nyc mocha .electron/test/calc.spec.js",
+    "test-add-reporter": "mocha .electron/test/calc.spec.js --reporter mochawesome --reporter-options reportDir=mochaReporter,reportFilename=addReporter"
   },
   "keywords": [
     "electron"
