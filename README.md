@@ -12,6 +12,10 @@ start web service
 
 start electron client
 
+- npm run build-main
+
+build main process code
+
 - npm run build-win
 
 build windows x86 platform
@@ -24,6 +28,10 @@ build arm platform
 
 build linux platform
 
+- npm run test-xxx
+
+run unit test code
+
 ## 注意事项
 
 ### 依赖文件手动下载地址
@@ -32,7 +40,7 @@ build linux platform
 
 - [niss](https://github.com/electron-userland/electron-builder-binaries/releases/tag/nsis-3.0.4.1)
 
-### niss乱码解析配置修改（项目目录中存在中文字符，导致打包失败）
+### nsis乱码解析配置修改（项目目录中存在中文字符，导致打包失败）
 
 ```JavaScript
 //node_module/app-builder-lib/out/targets/nsis/NsisTarget.js

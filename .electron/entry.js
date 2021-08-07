@@ -1,8 +1,9 @@
-const { app, BrowserWindow, Notification, dialog, ipcMain, globalShortcut, Menu, MenuItem } = require('electron')
+const { app, BrowserWindow, Notification, dialog, ipcMain, globalShortcut, Menu, MenuItem, Tray } = require('electron')
 // const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
 const minimist = require('minimist')
 const fs = require('fs')
+const regedit = require('regedit')
 
 const args = minimist(process.argv.slice(1))
 
@@ -30,7 +31,8 @@ if (args.mode !== 'development') {
         path: process.execPath
     })
 }
-
+// 读取系统注册表
+readRegedit()
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
@@ -45,10 +47,20 @@ app.on('activate', () => {
         createWindow()
     }
 })
-
+let tray = null
 app.on('ready', () => {
     init()
     registerShortcut()
+    let iconPath = path.resolve('./.electron/desktop.png')
+    tray = new Tray(iconPath)
+    const contextMenu = Menu.buildFromTemplate([
+        { label: 'Item1', type: 'radio' },
+        { label: 'Item2', type: 'radio' },
+        { label: 'Item3', type: 'radio', checked: true },
+        { label: 'Item4', type: 'radio' }
+    ])
+    tray.setToolTip('This is my application.')
+    tray.setContextMenu(contextMenu)
 })
 
 app.on('will-quit', () => {
@@ -121,6 +133,13 @@ function registerShortcut () {
         console.log('registration failed')
     }
 
-    // 检查快捷键是否注册成功
+    // 检查快捷键是否注册成功 
     console.log(globalShortcut.isRegistered('CommandOrControl+X'))
+}
+// 读取系统注册表
+function readRegedit () {
+    regedit.list(['HKCU\\SOFTWARE\\2345.com'], function(err, result) {
+        debugger
+        // console.log(result)
+    })
 }
