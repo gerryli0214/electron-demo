@@ -7,14 +7,25 @@
 <script>
 export default{
   name: 'testDemo',
-  data () {
-    return {
-      count: 0
+  props: {
+    count: {
+      type: Number,
+      default: 0
+    }
+  },
+  computed: {
+    summary: {
+      get () {
+        return this.count
+      },
+      set (val) {
+        this.count = val
+      }
     }
   },
   methods: {
     add () {
-      this.count++
+      this.summary++
     }
   }
 }

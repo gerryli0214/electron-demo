@@ -1,10 +1,14 @@
 {
     "productName": "demo",
-    "appId": "com.aimooc.xxxxx",
-    "copyright": "xxxx",
+    "appId": "com.demo.electron",
+    "copyright": "@copyright",
+    "extraMetadata": {
+      "main": "mainPackage/index.js"
+    },
     "directories": {
       "output": "dist"
     },
+    "asar": true,
     "nsis": {
       "oneClick": false,
       "allowElevation": true,
@@ -20,8 +24,8 @@
       }
     ],
     "files": [
-      "webPackage/**/*",
-      ".electron/**/*"
+      "mainPackage/**/*",
+      "webPackage/**/*"
     ],
     "win": {
       "icon": "build/icons/222.ico",
@@ -29,7 +33,7 @@
         {
           "target": "nsis",
           "arch": [
-            "ia32"
+            "x64"
           ]
         }
       ]

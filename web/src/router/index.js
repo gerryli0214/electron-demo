@@ -16,7 +16,7 @@ const constantRoutes = [
         path: 'voice-record',
         component: () => import('../views/voice-record/index.vue'),
         meta: {
-          title: '音频处理'
+          title: '测试'
         }
       }
       // {

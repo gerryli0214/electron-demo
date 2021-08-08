@@ -57,7 +57,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./index.html"
+            template: "./main.html"
         }),
         new VueLoaderPlugin()
     ],
