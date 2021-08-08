@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Notification, dialog } = require('electron')
-// const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
+const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
 const path = require('path')
 const minimist = require('minimist')
 
@@ -40,9 +40,9 @@ process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 function init () {
     createWindow()
-    // installExtension(VUEJS_DEVTOOLS)
-    // .then((name) => console.log(`Added Extension:  ${name}`))
-    // .catch((err) => console.log('An error occurred: ', err))
+    installExtension(VUEJS_DEVTOOLS)
+    .then((name) => console.log(`Added Extension:  ${name}`))
+    .catch((err) => console.log('An error occurred: ', err))
 }
 
 function getDefaultOption () {
