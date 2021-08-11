@@ -26,7 +26,7 @@ global.shareData = {
 // 设置开机自启动
 if (args.mode !== 'development') {
     app.setLoginItemSettings({
-        openAtLogin: true,
+        openAtLogin: false,
         openAsHidden:false,
         path: process.execPath
     })
@@ -35,9 +35,10 @@ if (args.mode !== 'development') {
 readRegedit()
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    }
+    // if (process.platform !== 'darwin') {
+    //     app.quit()
+    // }
+    // createTray()
 })
 
 app.on('activate', () => {
@@ -51,7 +52,18 @@ let tray = null
 app.on('ready', () => {
     init()
     registerShortcut()
-    let iconPath = path.resolve('./.electron/desktop.png')
+    createTray()
+})
+
+app.on('will-quit', () => {
+    globalShortcut.unregisterAll()
+})
+
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
+function createTray () {
+    let iconPath = path.resolve(__dirname, './asserts/desktop.png')
+    console.log(`iconPath---> ${iconPath}`)
     tray = new Tray(iconPath)
     const contextMenu = Menu.buildFromTemplate([
         { label: 'Item1', type: 'radio' },
@@ -61,13 +73,7 @@ app.on('ready', () => {
     ])
     tray.setToolTip('This is my application.')
     tray.setContextMenu(contextMenu)
-})
-
-app.on('will-quit', () => {
-    globalShortcut.unregisterAll()
-})
-
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+}
 
 function init () {
     let filePath = args.mode === 'development' ? 'http://localhost:8080/main.html' : path.resolve(__dirname, '../resources/app.asar/webPackage/main.html')
@@ -139,7 +145,10 @@ function registerShortcut () {
 // 读取系统注册表
 function readRegedit () {
     regedit.list(['HKCU\\SOFTWARE\\2345.com'], function(err, result) {
-        debugger
-        // console.log(result)
+        if (err) {
+            console.error(err)
+        } else {
+            console.log(result)
+        }
     })
 }
