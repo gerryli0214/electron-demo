@@ -1,5 +1,6 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const BasicPlugin = require('./my-plugins/test-plugin/index')
 // const GenerateAssetPlugin = require('generate-asset-webpack-plugin');
 
 function createJSON () {
@@ -43,6 +44,9 @@ module.exports = {
       new CleanWebpackPlugin({
         root: path.resolve(__dirname, 'mainPackage')
       }),
+      new BasicPlugin({
+          test: 111
+      })
     //   new GenerateAssetPlugin({
     //     filename: 'package.json',
     //     fn: (compilation, cb) => {
