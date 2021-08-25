@@ -25,7 +25,8 @@
     ],
     "files": [
       "mainPackage/**/*",
-      "webPackage/**/*"
+      "webPackage/**/*",
+      ".electron/asserts"
     ],
     "win": {
       "icon": "build/icons/222.ico",

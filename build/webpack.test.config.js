@@ -5,7 +5,6 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
     entry: './web/src/main.js',
-    mode: 'development',
     output: {
         path: path.resolve(__dirname, '../webPackage'),
         filename: '[name].[hash].js',

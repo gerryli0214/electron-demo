@@ -1,0 +1,14 @@
+{
+  "name": "test-loader",
+  "version": "1.0.0",
+  "description": "This is a webpack test loader",
+  "main": "test-loader.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "webpack-loader"
+  ],
+  "author": "gerry",
+  "license": "ISC"
+}
