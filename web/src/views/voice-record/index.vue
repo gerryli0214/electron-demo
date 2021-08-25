@@ -3,6 +3,22 @@
     <button @click="sendMessageToMainProcess">主进程与渲染进程间通信</button>
     <button @click="openNewWindow">打开新窗口</button>
     <button @click="sendMessageToRenderProcess">渲染进程与渲染进程通信</button>
+    <div class="container">
+      <Carousel v-model="value1" style="width: 500px;height: 200px;background: #ccc;">
+        <CarouselItem>
+          <div class="demo-carousel">1</div>
+        </CarouselItem>
+        <CarouselItem>
+          <div class="demo-carousel">2</div>
+        </CarouselItem>
+        <CarouselItem>
+          <div class="demo-carousel">3</div>
+        </CarouselItem>
+        <CarouselItem>
+          <div class="demo-carousel">4</div>
+        </CarouselItem>
+      </Carousel>
+    </div>
   </div>
 </template>
 

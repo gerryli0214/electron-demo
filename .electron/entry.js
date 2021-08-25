@@ -75,18 +75,11 @@ app.on('will-quit', () => {
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
 function init () {
-<<<<<<< HEAD
-    createWindow()
-    installExtension(VUEJS_DEVTOOLS)
-    .then((name) => console.log(`Added Extension:  ${name}`))
-    .catch((err) => console.log('An error occurred: ', err))
-=======
     let filePath = args.mode === 'development' ? 'http://localhost:8080/main.html' : path.resolve(__dirname, '../resources/app.asar/webPackage/main.html')
     createWindow(filePath)
     // installExtension(VUEJS_DEVTOOLS)
     // .then((name) => console.log(`Added Extension:  ${name}`))
     // .catch((err) => console.log('An error occurred: ', err))
->>>>>>> c2e3f748e98747ea47abe36f72b55961dfc32c2f
 }
 
 function getDefaultOption () {
