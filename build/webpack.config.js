@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HappyPack = require('happypack')
 // 多进程压缩代码
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -104,7 +105,14 @@ module.exports = {
                 // 提取出出现多次但是没有定义成变量去引用的静态值
                 reduce_vars: true,
             }
-        })
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: './web/src/lib/worker/*',
+                to: path.join(__dirname, "../webPackage/js/[name].[ext]"),
+                context: path.join(__dirname, '../'),
+            }
+        ])
     ],
     target: 'electron-renderer'
 }

@@ -1,65 +1,54 @@
 <template>
   <div class="full">
-    <button @click="sendMessageToMainProcess">主进程与渲染进程间通信</button>
-    <button @click="openNewWindow">打开新窗口</button>
-    <button @click="sendMessageToRenderProcess">渲染进程与渲染进程通信</button>
+    <!-- <button>开始录制</button> -->
+    <el-form :inline='true' size="small">
+      <el-form-item label="录音设备：">
+        <el-select placeholder="请选择..." v-model="recordParams.deviceId">
+          <el-option v-for="(item, index) in recordList" :key="index" :value="item.deviceId" :label="item.label"></el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
+
+    <div class="container">
+      <button @click="startRecord">开始</button>
+    </div>
   </div>
 </template>
 
 <script>
   import VoiceHandler from '../../lib/voice-handler.js'
-  const { ipcRenderer, Menu, MenuItem } = $electron
   export default {
     name: 'voiceRecord',
     data () {
       return {
         voiceInstance: null,
-        winInstance: null
+        recordList: [],
+        recordParams: {
+          deviceId: ''
+        }
       }
     },
-    mounted() {
-      this.voiceInstance = new VoiceHandler()
-      if (!this.voiceInstance.isCanRecord) {
-        this.$message.error('当前浏览器不支持录音')
-        return
-      }
-      this.voiceInstance.getRecordList()
-
-      ipcRenderer.on('asynchronous-reply', (event, arg) => {
-        console.log(arg) // prints "pong"
-      })
-
-      $ipc.on('TEST_WINDOW_CLOSE', this.handleTestWindowClose)
-
-      var menu = new Menu();
-      menu.append(new MenuItem({ label: '测试1', click: function() { console.log('item 1 clicked'); } }));
-      menu.append(new MenuItem({ type: 'separator' }));
-      menu.append(new MenuItem({ label: '测试2', type: 'checkbox', checked: true }));
-
-      window.oncontextmenu = function (e) {
-        e.preventDefault();
-        menu.popup($currentWindow);
-      }
+    created () {
+      this.init()
     },
     methods: {
-      openNewWindow () {
-        if (this.winInstance) {
-          alert('Test窗口已打开')
-          this.winInstance.moveTop()
-          return
+      async init () {
+        this.voiceInstance = new VoiceHandler()
+        this.recordList = await this.voiceInstance.getRecordList()
+        if (this.recordList.length > 0) {
+          this.recordParams.deviceId = this.recordList[0].deviceId
         }
-        let filePath = process.env.NODE_ENV === 'development' ? 'http://localhost:8080/test.html' : '../resources/app.asar/webPackage/test.html'
-        this.winInstance = $createWindow(filePath)
       },
-      sendMessageToMainProcess () {
-        ipcRenderer.send('asynchronous-message', 'ping')
-      },
-      sendMessageToRenderProcess () {
-        $ipc.send('TEST_SEND_MESSAGE', 'hello world')
-      },
-      handleTestWindowClose () {
-        this.winInstance = null
+      startRecord () {
+        this.voiceInstance.start()
       }
     }
   }
 </script>
+
+<style scoped lang='scss'>
+.full{
+  box-sizing: border-box;
+  padding: 24px;
+}
+</style>

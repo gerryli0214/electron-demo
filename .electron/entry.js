@@ -28,11 +28,15 @@ if (args.mode !== 'development') {
     app.setLoginItemSettings({
         openAtLogin: false,
         openAsHidden:false,
-        path: process.execPath
+        path: process.execPath,
+        args: [
+            '--process-start-args',
+            '"--hidden"'
+        ]
     })
 }
 // 读取系统注册表
-readRegedit()
+// readRegedit()
 
 app.on('window-all-closed', () => {
     // if (process.platform !== 'darwin') {
@@ -66,10 +70,12 @@ function createTray () {
     console.log(`iconPath---> ${iconPath}`)
     tray = new Tray(iconPath)
     const contextMenu = Menu.buildFromTemplate([
-        { label: 'Item1', type: 'radio' },
-        { label: 'Item2', type: 'radio' },
-        { label: 'Item3', type: 'radio', checked: true },
-        { label: 'Item4', type: 'radio' }
+        { label: '显示主页面', click: () => {
+            // app.show()
+        } },
+        { label: '退出', click: () => {
+            app.quit()
+        } }
     ])
     tray.setToolTip('This is my application.')
     tray.setContextMenu(contextMenu)

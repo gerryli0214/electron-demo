@@ -1,11 +1,12 @@
 (function () {
-  const { remote, ipcRenderer } = require('electron')
+  const { remote, ipcRenderer, desktopCapturer } = require('electron')
   const ipc = require('./class/ipc.js')
   const shareData = remote.getGlobal('shareData')
 
   global.$currentWindow = remote.getCurrentWindow()
 
   shareData.$electron.ipcRenderer = ipcRenderer
+  shareData.$electron.desktopCapturer = desktopCapturer
 
   global.$electron = shareData.$electron
 
