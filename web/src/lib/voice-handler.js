@@ -43,9 +43,13 @@ class VoiceHandler {
         console.error(err)
       })
       const ScriptProcessor = new AudioWorkletNode(this.audioCtx, 'audio-processor')
-      debugger
       mediaStream.connect(ScriptProcessor)
+      ScriptProcessor.port.onmessage = this.handleRecordAudioBuffer
     })
+  }
+
+  handleRecordAudioBuffer (buffer) {
+    debugger
   }
 
 }

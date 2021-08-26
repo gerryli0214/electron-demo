@@ -3,13 +3,19 @@
  */
 class AudioProcessor extends AudioWorkletProcessor {
   process (inputs, outputs, parameters) {
-    const output = outputs[0]
-    output.forEach(channel => {
-      for (let i = 0; i < channel.length; i++) {
-        channel[i] = Math.random() * 2 - 1
-      }
-    })
+    let chunk = this.covertBlock(inputs[0][0])
+    this.port.postMessage(chunk)
     return true
+  }
+
+  covertBlock (buffer) {
+    var incomingData = new Uint8Array(buffer);
+    var i, l = incomingData.length;
+    var outputData = new Float32Array(incomingData.length);
+    for (i = 0; i < l; i++) {
+        outputData[i] = (incomingData[i] - 128) / 128.0;
+    }
+    return outputData;
   }
 }
 
