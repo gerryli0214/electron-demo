@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+const { app, BrowserWindow, Notification, dialog } = require('electron')
+const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
+=======
 const { app, BrowserWindow, Notification, dialog, ipcMain, globalShortcut, Menu, MenuItem, Tray } = require('electron')
 // const { default: installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer')
+>>>>>>> c2e3f748e98747ea47abe36f72b55961dfc32c2f
 const path = require('path')
 const minimist = require('minimist')
 const fs = require('fs')

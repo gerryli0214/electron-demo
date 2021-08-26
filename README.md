@@ -4,33 +4,33 @@ This is a electron demo
 
 ## 启动命令
 
-- npm run start-web
+- `npm run start-web`
 
-start web service
+启动`web`服务
 
-- npm run start-client
+- `npm run start-client`
 
-start electron client
+启动客户端
 
-- npm run build-main
+- `npm run build-main`
 
-build main process code
+构建主进程代码
 
-- npm run build-win
+- `npm run build-win`
 
-build windows x86 platform
+构建`windows`平台客户端
 
-- npm run build-arm
+- `npm run build-arm`
 
-build arm platform
+构建`arm`平台客户端
 
-- npm run build-linux
+- `npm run build-linux`
 
-build linux platform
+构建`linux`下客户端
 
-- npm run test-xxx
+- `npm run test-xxx`
 
-run unit test code
+单元测试用用例
 
 ## 注意事项
 
@@ -39,6 +39,8 @@ run unit test code
 - [electron-v10.4.7-win32-ia32.zip](https://github.com/electron/electron/releases/download/v10.4.7/electron-v10.4.7-win32-ia32.zip)
 
 - [niss](https://github.com/electron-userland/electron-builder-binaries/releases/tag/nsis-3.0.4.1)
+
+下载后放入`C:\Users\${count}\AppData\Local\electron-builder\Cache`中
 
 ### nsis乱码解析配置修改（项目目录中存在中文字符，导致打包失败）
 
