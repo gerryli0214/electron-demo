@@ -11,6 +11,7 @@
 
     <div class="container">
       <button @click="startRecord">开始</button>
+      <button @click='stopRecord'>结束</button>
     </div>
   </div>
 </template>
@@ -41,6 +42,9 @@
       },
       startRecord () {
         this.voiceInstance.start()
+      },
+      stopRecord () {
+        this.voiceInstance.stop()
       }
     }
   }

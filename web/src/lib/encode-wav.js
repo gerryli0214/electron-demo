@@ -93,15 +93,3 @@ export function createWavFromBuffer(buffer, sampleRate = 16000) {
   wav.setBuffer(buffer);
   return wav;
 }
-
-
-// ArrayBuffer -> Float32Array
-export const convertBlock = function(buffer) {
-  var incomingData = new Uint8Array(buffer);
-  var i, l = incomingData.length;
-  var outputData = new Float32Array(incomingData.length);
-  for (i = 0; i < l; i++) {
-      outputData[i] = (incomingData[i] - 128) / 128.0;
-  }
-  return outputData;
-}

@@ -1,6 +1,10 @@
 /**
  * @description 前端处理音频数据
  */
+import { createWavFromBuffer } from './encode-wav'
+const fs = require('fs')
+const path = require('path')
+
 class VoiceHandler {
   constructor () {
     this.init()
@@ -11,6 +15,13 @@ class VoiceHandler {
     this.isCanRecord = !!window.navigator.mediaDevices
     // 音频处理上下文
     this.audioCtx = new AudioContext()
+    this.sampleRate = this.audioCtx.sampleRate
+    // 缓存录制音频
+    this.cacheBuffer = new Int16Array()
+    this.audioFilePath = path.resolve(__dirname, '/audio')
+    if (!fs.existsSync(this.audioFilePath)) {
+      fs.mkdirSync(this.audioFilePath)
+    }
   }
   // 获取录音设备列表
   async getRecordList () {
@@ -42,14 +53,42 @@ class VoiceHandler {
       await this.audioCtx.audioWorklet.addModule('js/audio-processor.js').catch(err => {
         console.error(err)
       })
-      const ScriptProcessor = new AudioWorkletNode(this.audioCtx, 'audio-processor')
-      mediaStream.connect(ScriptProcessor)
-      ScriptProcessor.port.onmessage = this.handleRecordAudioBuffer
+      const scriptProcessor = new AudioWorkletNode(this.audioCtx, 'audio-processor')
+      mediaStream.connect(scriptProcessor)
+      scriptProcessor.port.onmessage = this.handleRecordAudioBuffer.bind(this)
+      this.scriptProcessor = scriptProcessor
     })
   }
 
-  handleRecordAudioBuffer (buffer) {
-    debugger
+  handleRecordAudioBuffer (event) {
+    this.cacheBuffer = this.concatBuffer(this.cacheBuffer, event.data)
+  }
+
+  concatBuffer (buffer1, buffer2) {
+    let newBuffer = new Int16Array(buffer1.length + buffer2.length)
+    newBuffer.set(buffer1)
+    newBuffer.set(buffer2, buffer1.length)
+    return newBuffer
+  }
+
+  pause () {
+    this.audioCtx.suspend()
+  }
+
+  resume () {
+    this.audioCtx.resume()
+  }
+
+  stop () {
+    this.audioCtx.close()
+    let audioBuffer = createWavFromBuffer(this.cacheBuffer, this.sampleRate)
+    fs.writeFile(path.resolve(this.audioFilePath, `${Date.now()}.wav`), audioBuffer._buffer, err =>{
+      if (err) {
+        console.error(err)
+      } else {
+        console.log('文件写入成功!')
+      }
+    })
   }
 
 }
