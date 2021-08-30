@@ -11,6 +11,10 @@ class VoiceHandler {
   }
 
   async init () {
+    this.PENDING = 'pending'
+    this.PAUSE = 'pause'
+    this.STOP = 'stop'
+    this.RECORDING = 'recording'
     // web端录音需要用户权限授权，仅当localhost && https服务下可用
     this.isCanRecord = !!window.navigator.mediaDevices
     // 音频处理上下文
@@ -22,6 +26,8 @@ class VoiceHandler {
     if (!fs.existsSync(this.audioFilePath)) {
       fs.mkdirSync(this.audioFilePath)
     }
+    // 当前录音状态
+    this.recordState = this.PENDING
   }
   // 获取录音设备列表
   async getRecordList () {
@@ -57,6 +63,8 @@ class VoiceHandler {
       mediaStream.connect(scriptProcessor)
       scriptProcessor.port.onmessage = this.handleRecordAudioBuffer.bind(this)
       this.scriptProcessor = scriptProcessor
+      this.audioTracks = stream.getAudioTracks()
+      this.recordState = this.RECORDING
     })
   }
 
@@ -72,15 +80,25 @@ class VoiceHandler {
   }
 
   pause () {
+    this.recordState = this.PAUSE
+    this.sendMessage(this.recordState)
     this.audioCtx.suspend()
+  }
+  // 线程间通信
+  sendMessage (message) {
+    if (!this.scriptProcessor) throw new Error('未找到音频处理上下文！')
+    this.scriptProcessor.port.postMessage(message)
   }
 
   resume () {
+    this.recordState = this.RECORDING
+    this.sendMessage(this.recordState)
     this.audioCtx.resume()
   }
 
   stop () {
     this.audioCtx.close()
+    if (this.audioTracks.length > 0) this.audioTracks[0].stop()
     let audioBuffer = createWavFromBuffer(this.cacheBuffer, this.sampleRate)
     fs.writeFile(path.resolve(this.audioFilePath, `${Date.now()}.wav`), audioBuffer._buffer, err =>{
       if (err) {
