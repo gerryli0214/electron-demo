@@ -120,9 +120,9 @@ function createWindow (filePath, options) {
     let currentOptions = Object.create(getDefaultOption())
     Object.assign(currentOptions, options)
     console.log('打开页面')
-    if (!httpPattern.test(filePath)) {
-        filePath = path.resolve(__dirname, filePath)
-    }
+    // if (!httpPattern.test(filePath)) {
+    //     filePath = path.resolve(__dirname, filePath)
+    // }
     const win = new BrowserWindow(currentOptions)
     console.log(`load file path-----> ${filePath}`)
     win.loadURL(filePath)

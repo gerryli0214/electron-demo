@@ -18,6 +18,13 @@ const constantRoutes = [
         meta: {
           title: '测试'
         }
+      },
+      {
+        path: 'markdown-editor',
+        component: () => import('../views/markdown-editor/index.vue'),
+        meta: {
+          title: 'mardown'
+        }
       }
       // {
       //   path: 'screen-record',

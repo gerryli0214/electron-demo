@@ -12,12 +12,14 @@
     <div class="container">
       <button @click="startRecord">开始</button>
       <button @click='stopRecord'>结束</button>
+      <button @click='openFile'>打开文件</button>
     </div>
   </div>
 </template>
 
 <script>
   import VoiceHandler from '../../lib/voice-handler.js'
+  const { shell } = $electron
   export default {
     name: 'voiceRecord',
     data () {
@@ -45,6 +47,10 @@
       },
       stopRecord () {
         this.voiceInstance.stop()
+      },
+      openFile () { // 用系统默认程序打开文件
+        // shell.openExternal('https://baidu.com')
+        shell.openPath('D:\\现代Web开发中TypeScript的价值体现.pptx')
       }
     }
   }
