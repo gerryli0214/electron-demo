@@ -1,0 +1,11 @@
+filename: css/main.8d62184cf6c90f87a3c9.css  size: 345.16 KB
+filename: ./js/main.401356cc925535a7ac46.js  size: 236.16 KB
+filename: css/test.8d62184cf6c90f87a3c9.css  size: 345.16 KB
+filename: ./js/test.401356cc925535a7ac46.js  size: 20.29 KB
+filename: ./js/2.401356cc925535a7ac46.js  size: 58.77 KB
+filename: ./js/3.401356cc925535a7ac46.js  size: 38.49 KB
+filename: ./js/4.401356cc925535a7ac46.js  size: 5.72 KB
+filename: main.html  size: 363 B
+filename: test.html  size: 363 B
+filename: js/audio-processor.js  size: 666 B
+filename: static/vendor.dll.js  size: 764.69 KB

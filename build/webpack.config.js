@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
@@ -8,7 +9,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HappyPack = require('happypack')
 // 多进程压缩代码
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+// 资源拷贝插件
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+// 自定义webpack插件
+const BasePlugin = require('./my-plugins/test-plugin/index')
 
 module.exports = {
     entry: {
@@ -39,18 +43,21 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     // {
-                    //     loader: 'babel-loader',
-                    //     options: {
-                    //         presets: ['@babel/preset-env']
-                    //     }
-                    // }, 
-                {
-                    loader: 'eslint-loader',
-                    options: {
-                        fix: true
-                    }
-                }, {
-                    loader: 'happypack/loader?id=babel'
+                    //     loader: path.resolve('build/my-loaders/test-loader/test-loader.js')
+                    // },
+                    {
+                        loader: path.resolve('build/my-loaders/drop-console/drop-console.js')
+                    },
+                    {
+                        loader: 'cache-loader'
+                    },
+                    {
+                        loader: 'eslint-loader',
+                        options: {
+                            fix: true
+                        }
+                    }, {
+                        loader: 'happypack/loader?id=babel'
                 }]
             },
             {
@@ -59,7 +66,6 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-
                 test: /\.(jpg|png|gif|woff|woff2|svg|ttf|eot)$/,
                 use: ['url-loader'],
             },
@@ -89,12 +95,6 @@ module.exports = {
             loaders: ['babel-loader?cacheDirectory']
         }),
         new ParallelUglifyPlugin({
-            // uglifyJS: {
-            //     // 最紧凑的输出
-            //     // beautify: false,
-            //     // 删除所有的注释
-            //     // comments: false
-            // },
             compress: {
                 // 在UglifyJs删除没有用到的代码时不输出警告
                 warnings: false,
@@ -111,8 +111,17 @@ module.exports = {
                 from: './web/src/lib/worker/*',
                 to: path.join(__dirname, "../webPackage/js/[name].[ext]"),
                 context: path.join(__dirname, '../'),
+            },
+            {
+                from: './static/*',
+                to: path.join(__dirname, "../webPackage")
             }
-        ])
+        ]),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('../vendor-manifest.json')
+        }),
+        new BasePlugin()
     ],
     target: 'electron-renderer'
 }

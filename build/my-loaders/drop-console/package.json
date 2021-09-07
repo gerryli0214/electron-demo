@@ -1,0 +1,21 @@
+{
+  "name": "drop-console",
+  "version": "1.0.0",
+  "description": "This is a drop console loader",
+  "main": "drop-console.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "drop",
+    "console"
+  ],
+  "author": "gerry",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/generator": "^7.15.4",
+    "@babel/parser": "^7.15.5",
+    "@babel/traverse": "^7.15.4",
+    "@babel/types": "^7.15.4"
+  }
+}
